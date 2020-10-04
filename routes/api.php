@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ItemController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,4 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/items/all', 'ItemController@getAllItems');
+Route::get('/items/all', [ItemController::class, 'getAllItems']);
+Route::get('/items/{id}',[ItemController::class, 'getAnItem']);
