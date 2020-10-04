@@ -18,6 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/items/all', [ItemController::class, 'getAllItems']);
-Route::get('/item/{id}',[ItemController::class, 'getAnItem']);
+Route::get('/items/all', [ItemController::class, 'getAll']);
+Route::get('/item/{id}',[ItemController::class, 'get']);
 Route::post('/item/create',[ItemController::class, 'create']);
+Route::put('/item/update/{id}',[ItemController::class, 'update']);
+Route::delete('/item/delete/{id}',[ItemController::class, 'delete']);
