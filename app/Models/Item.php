@@ -10,6 +10,6 @@ class Item extends Model
     use HasFactory;
     public function location()
     {
-        return $this->hasOne('App\Models\location');
+        return $this->hasOne('App\Models\Location');
     }
 }

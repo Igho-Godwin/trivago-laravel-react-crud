@@ -19,4 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/items/all', [ItemController::class, 'getAllItems']);
-Route::get('/items/{id}',[ItemController::class, 'getAnItem']);
+Route::get('/item/{id}',[ItemController::class, 'getAnItem']);
+Route::post('/item/create',[ItemController::class, 'create']);
