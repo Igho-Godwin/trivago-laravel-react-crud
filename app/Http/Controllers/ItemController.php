@@ -40,7 +40,7 @@ class ItemController extends Controller
     public function getAll()
     {
         try {
-            $items = Item::where('status', 'available')->with('location')->get();
+            $items = Item::where('status', 'available')->with('location')->paginate(50);
             return response()->json(['items' => $items, 'message' => self::SUCCESS_MSG], 200);
         } catch (\Exception $e) {
             return response()->json(['type' => 'https://www.restapitutorial.com/httpstatuscodes.html',
