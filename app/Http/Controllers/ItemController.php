@@ -9,18 +9,90 @@ use Validator;
 
 class ItemController extends Controller
 {
-    private const SUCCESS_MSG = 'Successful' ;
+    private const SUCCESS_MSG = 'Successful';
+
+    /** @OA\Get(
+     * path="/api/items/all",
+     * summary="Retrieve All items",
+     * description="Retrieve All items",
+     * operationId="getAll",
+     * tags={"items"},
+     * @OA\Response(
+     *    response=200,
+     *    description="Success",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="items", type="object"),
+     *       @OA\Property(property="message", type="string")
+     *        )
+     *     ),
+     * @OA\Response(
+     *    response=500,
+     *    description="Internal Server Error",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="type", type="string"),
+     *       @OA\Property(property="title", type="string"),
+     *       @OA\Property(property="error", type="string"),
+     *    )
+     * )
+     * )
+     */
+
     public function getAll()
     {
         try {
             $items = Item::where('status', 'available')->with('location')->get();
-            return response()->json(['items' => $items,'message'=>self::SUCCESS_MSG], 200);
+            return response()->json(['items' => $items, 'message' => self::SUCCESS_MSG], 200);
         } catch (\Exception $e) {
             return response()->json(['type' => 'https://www.restapitutorial.com/httpstatuscodes.html',
                 'title' => 'Internal Server Error',
                 'error' => $e->getMessage()], 500);
         }
     }
+
+    /** @OA\Get(
+     * path="/api/item/{id}",
+     * summary="Retrieve All items",
+     * description="Retrieve All items",
+     * operationId="getAll",
+     * tags={"items"},
+     * @OA\Parameter(
+     *    description="ID of item",
+     *    in="path",
+     *    name="id",
+     *    required=true,
+     *    example="1",
+     *    @OA\Schema(
+     *       type="integer",
+     *    )
+     * ),
+     * @OA\Response(
+     *    response=200,
+     *    description="Success",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="items", type="object"),
+     *       @OA\Property(property="message", type="string")
+     *        )
+     *     ),
+     *     @OA\Response(
+     *    response=400,
+     *    description="Bad request",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="type", type="string"),
+     *       @OA\Property(property="title", type="string"),
+     *       @OA\Property(property="invalid-params", type="object")
+     *        )
+     *     ),
+     * @OA\Response(
+     *    response=500,
+     *    description="Internal Server Error",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="type", type="string"),
+     *       @OA\Property(property="title", type="string"),
+     *       @OA\Property(property="error", type="string"),
+     *    )
+     * )
+     * )
+     */
 
     public function get($id)
     {
@@ -39,7 +111,7 @@ class ItemController extends Controller
 
             $item = Item::find($id);
             $item->location = $item->location;
-            return response()->json(['item' => $item,'message'=>self::SUCCESS_MSG], 200);
+            return response()->json(['item' => $item, 'message' => self::SUCCESS_MSG], 200);
 
         } catch (\Exception $e) {
             return response()->json(['type' => 'https://www.restapitutorial.com/httpstatuscodes.html',
@@ -48,6 +120,102 @@ class ItemController extends Controller
         }
 
     }
+
+    /**
+     * @OA\Post(
+     ** path="/api/item/create",
+     *   tags={"items"},
+     *   summary="createItem",
+     *   operationId="createItem",
+     *
+     *   @OA\RequestBody(
+     *    required=true,
+     *    description="Pass user credentials",
+     *      @OA\JsonContent(
+     *           @OA\Property(
+     *               property="name",
+     *               type="string"
+     *           ),
+     *           @OA\Property(
+     *               property="rating",
+     *               type="number"
+     *           ),
+     *           @OA\Property(
+     *               property="category",
+     *               type="string",
+     *               example="either hotel, alternative, hostel, lodge, resort, guesthouse"
+     *           ),
+     *           @OA\Property(
+     *               property="image",
+     *               type="string",
+     *           ),
+     *           @OA\Property(
+     *               property="reputation",
+     *               type="number"
+     *           ),
+     *          @OA\Property(
+     *               property="price",
+     *               type="number"
+     *           ),
+     *           @OA\Property(
+     *               property="availability",
+     *               type="number"
+     *           ),
+     *           @OA\Property(
+     *               property="location",
+     *               type="object",
+     *               @OA\Property(
+     *                  property="city",
+     *                  type="string"
+     *               ),
+     *               @OA\Property(
+     *                  property="state",
+     *                  type="string"
+     *               ),
+     *               @OA\Property(
+     *                  property="country",
+     *                  type="string"
+     *               ),
+     *               @OA\Property(
+     *                  property="zip_code",
+     *                  type="string"
+     *               ),
+     *               @OA\Property(
+     *                  property="address",
+     *                  type="string"
+     *               ),
+     *           ),
+     *
+     *      )
+     *   ),
+     * @OA\Response(
+     *    response=201,
+     *    description="Success",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="items", type="object"),
+     *       @OA\Property(property="message", type="string")
+     *        )
+     *     ),
+     *     @OA\Response(
+     *    response=400,
+     *    description="Bad request",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="type", type="string"),
+     *       @OA\Property(property="title", type="string"),
+     *       @OA\Property(property="invalid-params", type="object")
+     *        )
+     *     ),
+     * @OA\Response(
+     *    response=500,
+     *    description="Internal Server Error",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="type", type="string"),
+     *       @OA\Property(property="title", type="string"),
+     *       @OA\Property(property="error", type="string"),
+     *    )
+     * )
+     *)
+     **/
 
     public function create(Request $request)
     {
@@ -113,7 +281,7 @@ class ItemController extends Controller
             $location->save();
             $item->location = $location;
 
-            return response()->json(['item' => $item,'message'=>self::SUCCESS_MSG], 200);
+            return response()->json(['item' => $item, 'message' => self::SUCCESS_MSG], 201);
 
         } catch (\Exception $e) {
             return response()->json(['type' => 'https://www.restapitutorial.com/httpstatuscodes.html',
@@ -123,7 +291,112 @@ class ItemController extends Controller
 
     }
 
-    public function update(Request $request,$id)
+    /**
+     * @OA\Put(
+     ** path="/api/item/update/{id}",
+     *   tags={"items"},
+     *   summary="createItem",
+     *   operationId="createItem",
+     * @OA\Parameter(
+     *    description="ID of item",
+     *    in="path",
+     *    name="id",
+     *    required=true,
+     *    example="1",
+     *    @OA\Schema(
+     *       type="integer",
+     *    )
+     * ),
+     *   @OA\RequestBody(
+     *    required=true,
+     *    description="Pass user credentials",
+     *      @OA\JsonContent(
+     *           @OA\Property(
+     *               property="name",
+     *               type="string"
+     *           ),
+     *           @OA\Property(
+     *               property="rating",
+     *               type="number"
+     *           ),
+     *           @OA\Property(
+     *               property="category",
+     *               type="string",
+     *               example="either hotel, alternative, hostel, lodge, resort, guesthouse"
+     *           ),
+     *           @OA\Property(
+     *               property="image",
+     *               type="string",
+     *           ),
+     *           @OA\Property(
+     *               property="reputation",
+     *               type="number"
+     *           ),
+     *          @OA\Property(
+     *               property="price",
+     *               type="number"
+     *           ),
+     *           @OA\Property(
+     *               property="availability",
+     *               type="number"
+     *           ),
+     *           @OA\Property(
+     *               property="location",
+     *               type="object",
+     *               @OA\Property(
+     *                  property="city",
+     *                  type="string"
+     *               ),
+     *               @OA\Property(
+     *                  property="state",
+     *                  type="string"
+     *               ),
+     *               @OA\Property(
+     *                  property="country",
+     *                  type="string"
+     *               ),
+     *               @OA\Property(
+     *                  property="zip_code",
+     *                  type="string"
+     *               ),
+     *               @OA\Property(
+     *                  property="address",
+     *                  type="string"
+     *               ),
+     *           ),
+     *
+     *      )
+     *   ),
+     * @OA\Response(
+     *    response=200,
+     *    description="Success",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="items", type="object"),
+     *       @OA\Property(property="message", type="string")
+     *        )
+     *     ),
+     *     @OA\Response(
+     *    response=400,
+     *    description="Bad request",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="type", type="string"),
+     *       @OA\Property(property="title", type="string"),
+     *       @OA\Property(property="invalid-params", type="object")
+     *        )
+     *     ),
+     * @OA\Response(
+     *    response=500,
+     *    description="Internal Server Error",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="type", type="string"),
+     *       @OA\Property(property="title", type="string"),
+     *       @OA\Property(property="error", type="string"),
+     *    )
+     * )
+     *)
+     **/
+
+    public function update(Request $request, $id)
     {
 
         try {
@@ -188,15 +461,50 @@ class ItemController extends Controller
             $location->country = $request->get('location')['country'];
             $location->address = $request->get('location')['address'];
             $location->save();
-            return response()->json(['item' => $item,'message'=>self::SUCCESS_MSG], 200);
+            return response()->json(['item' => $item, 'message' => self::SUCCESS_MSG], 200);
 
         } catch (\Exception $e) {
+            var_dump($e->getMessage());
             return response()->json(['type' => 'https://www.restapitutorial.com/httpstatuscodes.html',
                 'title' => 'Internal Server Error',
                 'error' => $e->getMessage()], 500);
         }
 
     }
+
+    /**
+     * @OA\Delete(
+     ** path="/api/item/delete/{id}",
+     *   tags={"items"},
+     *   summary="deleteItem",
+     *   operationId="deleteItem",
+     * @OA\Parameter(
+     *    description="ID of item",
+     *    in="path",
+     *    name="id",
+     *    required=true,
+     *    example="1",
+     *    @OA\Schema(
+     *       type="integer",
+     *    )
+     * ),
+     *   @OA\Response(
+     *      response=200,
+     *       description="Success",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=400,
+     *      description="Bad Request"
+     *   ),
+     *   @OA\Response(
+     *      response=500,
+     *      description="Internal Server Error"
+     *   ),
+     *)
+     **/
 
     public function delete($id)
     {
@@ -217,7 +525,7 @@ class ItemController extends Controller
             $item->status = 'deleted';
             $item->save();
             $item->location = $item->location;
-            return response()->json(['item' => $item,'message'=>self::SUCCESS_MSG], 200);
+            return response()->json(['item' => $item, 'message' => self::SUCCESS_MSG], 200);
 
         } catch (\Exception $e) {
             return response()->json(['type' => 'https://www.restapitutorial.com/httpstatuscodes.html',
@@ -226,6 +534,60 @@ class ItemController extends Controller
         }
 
     }
+
+    /**
+     * @OA\Patch(
+     ** path="/api/item/book/{id}",
+     *   tags={"items"},
+     *   summary="bookItem",
+     *   operationId="bookItem",
+     * @OA\Parameter(
+     *    description="ID of item",
+     *    in="path",
+     *    name="id",
+     *    required=true,
+     *    example="1",
+     *    @OA\Schema(
+     *       type="integer",
+     *    )
+     * ),
+     * @OA\Response(
+     *    response=200,
+     *    description="Success",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="items", type="object"),
+     *       @OA\Property(property="message", type="string")
+     *        )
+     *     ),
+     *     @OA\Response(
+     *    response=400,
+     *    description="Bad request",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="type", type="string"),
+     *       @OA\Property(property="title", type="string"),
+     *       @OA\Property(property="invalid-params", type="object")
+     *        )
+     *     ),
+     *        @OA\Response(
+     *    response=403,
+     *    description="Booking not allowed",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="type", type="string"),
+     *       @OA\Property(property="title", type="string"),
+     *       @OA\Property(property="message", type="object")
+     *        )
+     *     ),
+     * @OA\Response(
+     *    response=500,
+     *    description="Internal Server Error",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="type", type="string"),
+     *       @OA\Property(property="title", type="string"),
+     *       @OA\Property(property="error", type="string"),
+     *    )
+     * )
+     *)
+     **/
 
     public function book($id)
     {
@@ -244,16 +606,16 @@ class ItemController extends Controller
 
             $item = Item::find($id);
 
-            if($item->availability > 0){
-                $item->availability-=$item->availability;
+            if ($item->availability > 0) {
+                $item->availability -= 1;
                 $item->save();
                 $item->location = $item->location;
-                return response()->json(['item' => $item,'message'=>self::SUCCESS_MSG], 200);
+                return response()->json(['item' => $item, 'message' => self::SUCCESS_MSG], 200);
             }
 
             return response()->json(['type' => 'https://www.restapitutorial.com/httpstatuscodes.html',
                 'title' => "Booking not allowed",
-                'message'=>"Item availability is at 0 so booking is not allowed."], 403);
+                'message' => "Item availability is at 0 so booking is not allowed."], 403);
 
         } catch (\Exception $e) {
             return response()->json(['type' => 'https://www.restapitutorial.com/httpstatuscodes.html',

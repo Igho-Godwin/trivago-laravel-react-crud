@@ -23,3 +23,4 @@ Route::get('/item/{id}',[ItemController::class, 'get']);
 Route::post('/item/create',[ItemController::class, 'create']);
 Route::put('/item/update/{id}',[ItemController::class, 'update']);
 Route::delete('/item/delete/{id}',[ItemController::class, 'delete']);
+Route::patch('/item/book/{id}',[ItemController::class, 'book']);
