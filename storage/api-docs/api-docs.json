@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Your super  ApplicationAPI",
+        "title": "Trivago Accomadation Logging Api",
         "version": "1.0.0"
     },
     "paths": {
@@ -24,27 +24,6 @@
                                             "type": "object"
                                         },
                                         "message": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "type": {
-                                            "type": "string"
-                                        },
-                                        "title": {
-                                            "type": "string"
-                                        },
-                                        "error": {
                                             "type": "string"
                                         }
                                     },
@@ -95,41 +74,17 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "Bad request",
+                    "422": {
+                        "description": "Your request parameters didn't validate.",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "type": {
+                                        "message": {
                                             "type": "string"
                                         },
-                                        "title": {
-                                            "type": "string"
-                                        },
-                                        "invalid-params": {
+                                        "errors": {
                                             "type": "object"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "type": {
-                                            "type": "string"
-                                        },
-                                        "title": {
-                                            "type": "string"
-                                        },
-                                        "error": {
-                                            "type": "string"
                                         }
                                     },
                                     "type": "object"
@@ -203,7 +158,7 @@
                     }
                 },
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "Success",
                         "content": {
                             "application/json": {
@@ -221,41 +176,17 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "Bad request",
+                    "422": {
+                        "description": "Your request parameters didn't validate.",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "type": {
+                                        "message": {
                                             "type": "string"
                                         },
-                                        "title": {
-                                            "type": "string"
-                                        },
-                                        "invalid-params": {
+                                        "errors": {
                                             "type": "object"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "type": {
-                                            "type": "string"
-                                        },
-                                        "title": {
-                                            "type": "string"
-                                        },
-                                        "error": {
-                                            "type": "string"
                                         }
                                     },
                                     "type": "object"
@@ -359,41 +290,17 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "Bad request",
+                    "422": {
+                        "description": "Your request parameters didn't validate.",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "type": {
+                                        "message": {
                                             "type": "string"
                                         },
-                                        "title": {
-                                            "type": "string"
-                                        },
-                                        "invalid-params": {
+                                        "errors": {
                                             "type": "object"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "type": {
-                                            "type": "string"
-                                        },
-                                        "title": {
-                                            "type": "string"
-                                        },
-                                        "error": {
-                                            "type": "string"
                                         }
                                     },
                                     "type": "object"
@@ -430,11 +337,23 @@
                             "application/json": {}
                         }
                     },
-                    "400": {
-                        "description": "Bad Request"
-                    },
-                    "500": {
-                        "description": "Internal Server Error"
+                    "422": {
+                        "description": "Your request parameters didn't validate.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "errors": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -477,19 +396,16 @@
                             }
                         }
                     },
-                    "400": {
-                        "description": "Bad request",
+                    "422": {
+                        "description": "Your request parameters didn't validate.",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "type": {
+                                        "message": {
                                             "type": "string"
                                         },
-                                        "title": {
-                                            "type": "string"
-                                        },
-                                        "invalid-params": {
+                                        "errors": {
                                             "type": "object"
                                         }
                                     },
@@ -512,27 +428,6 @@
                                         },
                                         "message": {
                                             "type": "object"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "type": {
-                                            "type": "string"
-                                        },
-                                        "title": {
-                                            "type": "string"
-                                        },
-                                        "error": {
-                                            "type": "string"
                                         }
                                     },
                                     "type": "object"

@@ -32,7 +32,7 @@ class ItemTest extends TestCase
     public function testGetSingleItemFail()
     {
         $response = $this->get('/api/item/' . 'x');
-        $response->assertStatus(400);
+        $response->assertStatus(422);
     }
 
     public function testCreateNewItemPass()
@@ -46,7 +46,7 @@ class ItemTest extends TestCase
     public function testCreateNewItemFail()
     {
         $response = $this->post('/api/item/create', []);
-        $response->assertStatus(400);
+        $response->assertStatus(302);
     }
 
     public function testUpdateAnItemPass()
@@ -62,7 +62,7 @@ class ItemTest extends TestCase
     public function testUpdateAnItemFail()
     {
         $response = $this->put('/api/item/update/' . 'x', []);
-        $response->assertStatus(400);
+        $response->assertStatus(302);
     }
 
     public function testDeleteAnItemPass()
@@ -75,7 +75,7 @@ class ItemTest extends TestCase
     public function testDeleteAnItemFail()
     {
         $response = $this->delete('/api/item/delete/' . 'x');
-        $response->assertStatus(400);
+        $response->assertStatus(422);
     }
 
     public function testBookingPass()
@@ -88,6 +88,6 @@ class ItemTest extends TestCase
     public function testBookingFail()
     {
         $response = $this->patch('/api/item/book/' . 'x');
-        $response->assertStatus(400);
+        $response->assertStatus(422);
     }
 }

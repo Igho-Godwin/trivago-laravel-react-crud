@@ -11,7 +11,7 @@ class Controller extends BaseController
 {
     /**
      * @OA\Info(
-     *    title="Your super  ApplicationAPI",
+     *    title="Trivago Accomadation Logging Api",
      *    version="1.0.0",
      * )
      */

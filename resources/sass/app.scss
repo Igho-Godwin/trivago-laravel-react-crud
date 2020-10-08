@@ -1,8 +1,116 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
 
-// Variables
-@import 'variables';
+body{
+    font-family: 'Roboto', sans-serif;
+}
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+.hero__logo {
+    width: 180px;
+    height: 58px;
+}
+
+.color-red{
+    color:red;
+}
+
+.color-blue{
+    color:blue;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.margin-top-20{
+    margin-top:20px;
+}
+
+.margin-top-10{
+    margin-top:10px;
+}
+
+.text-align-left{
+    text-align:left;
+}
+
+.margin-right-10{
+    margin-right:10px;
+}
+
+.margin-bottom-10{
+    margin-bottom:10px;
+}
+
+.overflow-auto{
+    overflow:auto;
+}
+
+.width-btn-form-100{
+    width:100%;
+}
+
+.margin-bottom-20{
+    margin-bottom:50px;
+}
+
+.display-block{
+    display:block;
+}
+
+.form-float-left{
+    float:left;
+}
+
+.form-float-right{
+    float:right;
+}
+
+.form-width-30{
+    width:30%;
+}
+
+.width-70{
+    width:70%;
+}
+
+.width-170{
+    width:170px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.textfield-style{
+    height: 25px;
+    border-radius: 5px;
+    border: 1px solid;
+    padding:5px;
+}
+
+.margin-auto{
+    margin-left:auto;
+    margin-right:auto;
+}
+
+@media only screen and (max-width: 1000px) {
+
+    .form-width-30{
+        width:100%;
+    }
+
+    .form-float-left{
+        float:none;
+    }
+
+    .form-float-right{
+        float:none;
+    }
+
+    .form-margin-top{
+        margin-top:10px;
+    }
+
+    .text-align-left{
+        text-align:center;
+    }
+}
